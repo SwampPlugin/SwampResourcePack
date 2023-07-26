@@ -1,0 +1,14 @@
+name: SwampResourcePack
+version: 1.0
+api-version: 1.19
+main: com.cosine.swamp.SwampResourcePack
+authors: [ Cosine_A ]
+libraries:
+  - "org.zeroturnaround:zt-zip:1.15"
+depend:
+  - SwampLibrary
+
+commands:
+  리소스팩:
+    permission: op
+    description: 리소스팩 관리 명령어입니다.

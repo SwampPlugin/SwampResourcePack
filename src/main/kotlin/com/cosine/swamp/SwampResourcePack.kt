@@ -46,7 +46,7 @@ class SwampResourcePack : JavaPlugin() {
         webConfig = WebConfig(this, webServerRegistry)
         webConfig.load()
 
-        resourcePackService = ResourcePackService(this, webConfig, webServerRegistry)
+        resourcePackService = ResourcePackService(this, webServerRegistry)
         resourcePackService.loadResourcePack()
 
         server.pluginManager.registerEvents(ResourcePackListener(resourcePackService), this)

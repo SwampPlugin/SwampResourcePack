@@ -1,6 +1,5 @@
 package com.cosine.swamp.config
 
-import com.cosine.swamp.enums.ResourcePackType
 import com.cosine.swamp.registry.WebServerRegistry
 import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.plugin.Plugin
@@ -35,17 +34,9 @@ class WebConfig(
                 logger.warning("ip를 불러오지 못했습니다.")
                 return@apply
             }
+            val port = getInt("port")
             webServerRegistry.setIp(ip)
-            getConfigurationSection("port")?.apply {
-                getKeys(false).forEach { key ->
-                    val resourcePackType = ResourcePackType.getResourcePackType(key) ?: run {
-                        logger.warning("port 섹션의 $key(은)는 존재하지 않는 타입입니다.")
-                        return@forEach
-                    }
-                    val port = getInt(key)
-                    webServerRegistry.setPort(resourcePackType, port)
-                }
-            }
+            webServerRegistry.setPort(port)
         }
     }
 

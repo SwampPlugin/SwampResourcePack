@@ -3,6 +3,4 @@
 # 리소스팩 웹 서버
 web-server:
   ip: localhost
-  port:
-    empty: 25564
-    generate: 25563
+  port: 25564

@@ -18,7 +18,6 @@ dependencies {
     compileOnly("org.zeroturnaround", "zt-zip", "1.15")
 
     compileOnly("io.vertx", "vertx-web", "4.4.4")
-    compileOnly("io.vertx", "vertx-lang-kotlin", "4.4.4")
 
     testImplementation(kotlin("test"))
 }

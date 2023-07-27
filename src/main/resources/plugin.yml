@@ -5,6 +5,7 @@ main: com.cosine.swamp.SwampResourcePack
 authors: [ Cosine_A ]
 libraries:
   - "org.zeroturnaround:zt-zip:1.15"
+  - "io.vertx:vertx-web:4.4.4"
 depend:
   - SwampLibrary
 

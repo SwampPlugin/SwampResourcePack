@@ -14,11 +14,7 @@ class ResourcePackAdminCommand(
 
     @SubKommand("리로드", "리소스팩을 리로드합니다.", helpPriority = 1)
     fun applyReouscePack(sender: CommandSender) {
-        val failReason = resourcePackService.reload()
-        if (failReason == null) {
-            sender.sendMessage("$prefix 리소스팩을 리로드하였습니다.")
-        } else {
-            sender.sendMessage("$prefix 파일을 불러오지 못했습니다.")
-        }
+        resourcePackService.reloadResourcePack()
+        sender.sendMessage("$prefix 리소스팩을 리로드하였습니다.")
     }
 }

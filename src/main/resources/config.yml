@@ -1,0 +1,8 @@
+# empty 폴더에는 assets 폴더와 형식에 맞는 pack.mcmeta 파일만 넣어주세요
+
+# 리소스팩 웹 서버
+web-server:
+  ip: localhost
+  port:
+    empty: 25564
+    generate: 25563

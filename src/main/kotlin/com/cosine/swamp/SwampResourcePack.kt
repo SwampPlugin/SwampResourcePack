@@ -2,10 +2,10 @@ package com.cosine.swamp
 
 import com.cosine.library.kommand.KommandManager
 import com.cosine.swamp.command.ResourcePackAdminCommand
+import com.cosine.swamp.config.WebConfig
 import com.cosine.swamp.listener.ResourcePackListener
+import com.cosine.swamp.registry.WebServerRegistry
 import com.cosine.swamp.service.ResourcePackService
-import com.cosine.swamp.service.VerticleService
-import io.vertx.core.Vertx
 import org.bukkit.plugin.java.JavaPlugin
 import java.io.File
 
@@ -20,12 +20,15 @@ class SwampResourcePack : JavaPlugin() {
     }
 
     private lateinit var resourcePackService: ResourcePackService
+    private lateinit var webServerRegistry: WebServerRegistry
+    private lateinit var webConfig: WebConfig
 
     override fun onLoad() {
         instance = this
         if (!dataFolder.exists()) {
             dataFolder.mkdirs()
         }
+        createFolder("empty")
         createFolder("input")
         createFolder("output")
     }
@@ -38,10 +41,13 @@ class SwampResourcePack : JavaPlugin() {
     }
 
     override fun onEnable() {
-        val vertx = Vertx.vertx()
-        vertx.deployVerticle(VerticleService())
+        webServerRegistry = WebServerRegistry()
 
-        resourcePackService = ResourcePackService(dataFolder, server)
+        webConfig = WebConfig(this, webServerRegistry)
+        webConfig.load()
+
+        resourcePackService = ResourcePackService(this, webConfig, webServerRegistry)
+        resourcePackService.loadResourcePack()
 
         server.pluginManager.registerEvents(ResourcePackListener(resourcePackService), this)
 
@@ -51,7 +57,7 @@ class SwampResourcePack : JavaPlugin() {
     }
 
     override fun onDisable() {
-
+        resourcePackService.stopHttpServer()
     }
 
     fun getResourcePackService(): ResourcePackService = resourcePackService

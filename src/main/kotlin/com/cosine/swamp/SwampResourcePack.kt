@@ -9,26 +9,32 @@ import com.cosine.swamp.service.ResourcePackService
 import org.bukkit.plugin.java.JavaPlugin
 import java.io.File
 
+@Suppress("MemberVisibilityCanBePrivate")
 class SwampResourcePack : JavaPlugin() {
 
     companion object {
-        private lateinit var instance: SwampResourcePack
+        internal lateinit var plugin: SwampResourcePack
+            private set
 
-        fun getInstance(): SwampResourcePack = instance
+        val instance: SwampResourcePack get() = plugin
 
-        internal const val prefix = "§b[ SwampResourcePack ]§f"
+        internal const val prefix = "§b[ SwampFarmingCrate ]§f"
     }
 
-    private lateinit var resourcePackService: ResourcePackService
-    private lateinit var webServerRegistry: WebServerRegistry
-    private lateinit var webConfig: WebConfig
+    lateinit var resourcePackService: ResourcePackService
+        private set
+
+    lateinit var webServerRegistry: WebServerRegistry
+        private set
+
+    lateinit var webConfig: WebConfig
+        private set
 
     override fun onLoad() {
-        instance = this
+        plugin = this
         if (!dataFolder.exists()) {
             dataFolder.mkdirs()
         }
-        createFolder("empty")
         createFolder("input")
         createFolder("output")
     }
@@ -59,6 +65,4 @@ class SwampResourcePack : JavaPlugin() {
     override fun onDisable() {
         resourcePackService.stopHttpServer()
     }
-
-    fun getResourcePackService(): ResourcePackService = resourcePackService
 }

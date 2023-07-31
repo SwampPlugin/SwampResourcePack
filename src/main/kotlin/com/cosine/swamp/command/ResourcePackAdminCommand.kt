@@ -10,7 +10,7 @@ import org.bukkit.command.CommandSender
 @Kommand("리소스팩")
 class ResourcePackAdminCommand(
     private val resourcePackService: ResourcePackService
-) : KommandBuilder(SwampResourcePack.getInstance(), SwampResourcePack.prefix) {
+) : KommandBuilder(SwampResourcePack.plugin, SwampResourcePack.prefix) {
 
     @SubKommand("리로드", "리소스팩을 리로드합니다.", helpPriority = 1)
     fun applyReouscePack(sender: CommandSender) {
